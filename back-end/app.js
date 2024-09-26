@@ -12,6 +12,7 @@ app.use(cors()) // allow cross-origin resource sharing
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
+
 // connect to database
 mongoose
   .connect(`${process.env.DB_CONNECTION_STRING}`)
@@ -76,6 +77,15 @@ app.post('/messages/save', async (req, res) => {
       status: 'failed to save the message to the database',
     })
   }
+})
+
+app.get('/aboutmedata', (req, res) => {
+  const data = {
+    name: "My name is Xiaowei Ma",
+    aboutUs: "Hi! I'm Xiaowei Ma. My preferred English name is William. I'm a junior student in Computer Science and Mathematics double major. My research interests are Artificial Intelligence and Autonomous Driving. I like cooking and driving for long road trips. Hope we can have a good time in the Agile Software Development course!",
+    img: "https://avatars.githubusercontent.com/u/134547184?s=400&u=0d844bcf54bcaba08c5a052bc95a762c5ee3dfab&v=4"
+  }
+  res.json(data)
 })
 
 // export the express app we created to make it available to other modules
